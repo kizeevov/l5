@@ -227,6 +227,12 @@ impl AppState {
         word_searcher.set_search_words(words.into())
     }
 
+    fn set_current_word_index(&self, index: usize) {
+        let main_window = self.main_window.unwrap();
+        let word_searcher = main_window.global::<WordSearcher>();
+        word_searcher.set_current_word_index(index as i32)
+    }
+
     fn clear_all(&self) {
         for word in self.words.iter() {
             let letters = &word.letters;
@@ -238,6 +244,7 @@ impl AppState {
         }
 
         self.update_search_words("");
+        self.set_current_word_index(0);
     }
 
     fn ranrom(&self) {
