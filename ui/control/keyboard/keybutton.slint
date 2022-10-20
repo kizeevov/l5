@@ -1,0 +1,36 @@
+export KeyButton := Rectangle {
+    property <string> text: "";
+    property <length> font-size: 14pt;
+
+    callback clicked(string);
+
+    background: {
+        touch.pressed ? #b1b9ce : 
+        touch.has-hover ? #c4cbdd : #dce1ed
+    }
+    animate background { duration: 100ms; }
+
+    border-radius: 4px;
+
+    min-height: 46px;
+    min-width: 46px;
+
+    Text { 
+        text: root.text;
+        font-size: root.font-size;
+        font-weight: 700;
+        color: #5a6376;
+
+        height: parent.height;
+        width: parent.width;
+
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+
+    touch := TouchArea {
+        clicked => { 
+            root.clicked(root.text);
+        }
+    }
+}

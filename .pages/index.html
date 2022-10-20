@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Letters 5 (L5)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="spinner" style="position: relative;">
+        <div class="spinner">Loading...</div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script type="module">
+        import init from './pkg/l5.js';
+        init().finally(() => {
+            document.getElementById("spinner").remove();
+        });
+    </script>
+</body>
+
+</html>

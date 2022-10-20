@@ -1,0 +1,6 @@
+import { KeyboardRu } from "keyboard_ru.slint";
+export Keyboard := Rectangle {
+    callback key-pressed(string);
+
+    KeyboardRu { key-pressed(key) => { root.key-pressed(key) }  }
+}

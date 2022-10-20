@@ -1,0 +1,58 @@
+import { KeyButton } from "keybutton.slint";
+
+export KeyboardRu := VerticalLayout {
+    callback key-pressed(string);
+
+    spacing: 6px;
+
+    HorizontalLayout {
+        spacing: 6px;
+
+        KeyButton { text: "Й"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ц"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "У"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "К"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Е"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Н"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Г"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ш"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Щ"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "З"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Х"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ъ"; clicked(key) => { root.key-pressed(key) } }
+    }
+
+    HorizontalLayout {
+        spacing: 6px;
+        alignment: center;
+
+        KeyButton { text: "Ф"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ы"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "В"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "А"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "П"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Р"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "О"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Л"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Д"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ж"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Э"; clicked(key) => { root.key-pressed(key) } }
+    }
+
+    HorizontalLayout {
+        spacing: 6px;
+        alignment: center;
+
+        KeyButton { text: "Я"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ч"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "С"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "М"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "И"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Т"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ь"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Б"; clicked(key) => { root.key-pressed(key) } }
+        KeyButton { text: "Ю"; clicked(key) => { root.key-pressed(key) } }
+
+        KeyButton { text: "⟵"; font-size: 26pt; width: min-width * 1.5; }
+    }
+}

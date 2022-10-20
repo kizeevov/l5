@@ -1,0 +1,13 @@
+export struct LetterModel := {
+    state: int,
+    char: string,
+}
+
+export struct WordModel := {
+    letters: [LetterModel]
+}
+
+export struct WordsModel := {
+    current-word-index: int,
+    words: [WordModel],
+}

@@ -1,0 +1,33 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+import { Word } from "control/word.slint";
+import { Keyboard } from "control/keyboard/keyboard.slint";
+import { WordModel, WordsModel } from "models.slint";
+
+export { WordsModel }
+
+export AppWindow := Window {
+    property <WordsModel> words;
+
+    callback key-pressed(string);
+
+    title: "5 letters";
+
+    VerticalBox { 
+        VerticalBox {
+            alignment: center;
+            spacing: 6px;
+
+            for word[index] in words.words: Word { 
+                selected: words.current-word-index == index;
+                word: word;
+                index: index + 1;
+
+                clicked => { 
+                    words.current-word-index = index;
+                }
+            }
+        }
+        
+        Keyboard { key-pressed(key) => { root.key-pressed(key) } }
+    }
+}

@@ -1,0 +1,25 @@
+[package]
+name = "l5"
+version = "0.1.0"
+authors = ["kizeevov <kizeev.ov@gmail.com>"]
+edition = "2021"
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+slint = "0.3"
+itertools = "0.10.5"
+
+[build-dependencies]
+slint-build = "0.3"
+
+
+[lib]
+path = "src/main.rs"
+crate-type = ["cdylib"]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = { version = "0.2" }
+web-sys = { version = "0.3", features = ["console"] }
+console_error_panic_hook = "0.1.5"

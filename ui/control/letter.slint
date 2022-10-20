@@ -1,0 +1,47 @@
+import { LetterModel } from "../models.slint";
+
+export Letter := Rectangle {
+    property<LetterModel> letter;
+
+    min-height: 56px;
+    min-width: 56px;
+
+    background: {
+        letter.state == 1 ? #a4aec4 :
+        letter.state == 2 ? #f3c237 :
+        letter.state == 3 ? #79b851 : #fbfcff
+    }
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: {
+        letter.state == 1 ? #a4aec4 :
+        letter.state == 2 ? #f3c237 :
+        letter.state == 3 ? #79b851 : #dee1e9
+    }
+
+    Text { 
+        text: parent.letter.char;
+        font-size: 18pt;
+        font-weight: 700;
+        color: #fff;
+
+        height: parent.height;
+        width: parent.width;
+
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+
+    TouchArea {
+        clicked => {
+            // if (root.letter.state == 0) {
+            //     return;
+            // }
+
+            root.letter.state = root.letter.state + 1;
+            if (root.letter.state > 3) {
+                root.letter.state = 1;
+            }
+        }
+    }
+}
