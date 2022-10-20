@@ -3,5 +3,5 @@
 
 ## Build wasm
 
-`wasm-pack build --release -d .pages/pkg --target web`
+`wasm-pack build --release -d docs/pkg --target web`
 
