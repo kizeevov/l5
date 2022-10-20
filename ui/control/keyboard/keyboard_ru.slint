@@ -41,7 +41,8 @@ export KeyboardRu := VerticalLayout {
 
     HorizontalLayout {
         spacing: 6px;
-        alignment: center;
+  
+        KeyButton { text: "⟵"; font-size: 26pt; horizontal-stretch: 2; clicked(key) => { root.key-pressed(key) }}
 
         KeyButton { text: "Я"; clicked(key) => { root.key-pressed(key) } }
         KeyButton { text: "Ч"; clicked(key) => { root.key-pressed(key) } }
@@ -53,6 +54,6 @@ export KeyboardRu := VerticalLayout {
         KeyButton { text: "Б"; clicked(key) => { root.key-pressed(key) } }
         KeyButton { text: "Ю"; clicked(key) => { root.key-pressed(key) } }
 
-        KeyButton { text: "⟵"; font-size: 26pt; width: min-width * 1.5; }
+        KeyButton { text: "Enter"; font-size: 12pt; horizontal-stretch: 2; clicked(key) => { root.key-pressed(key) }}
     }
 }

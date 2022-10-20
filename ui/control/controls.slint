@@ -1,0 +1,128 @@
+import { WordModel, LetterModel } from "../models.slint";
+
+export PrimaryButton := Rectangle {
+    property <string> text: "";
+
+    callback clicked();
+
+    border-radius: 5px;
+    height: 34px;
+
+    background: {
+        touch.pressed ? #d3ebd3 : 
+        touch.has-hover ? #e6f3e6 : #ebedf3
+    }
+    animate background { duration: 100ms; }
+
+
+    VerticalLayout { 
+        padding-left: 12px;
+        padding-right: 12px;
+        alignment: center;
+
+        Text {
+            text: root.text;
+            font-size: 14px;
+            color: touch.has-hover ? #57ac57 : #69758e;
+        }
+    }
+
+    touch := TouchArea {
+        clicked => { 
+            root.clicked();
+        }
+    }
+}
+
+export Letter := Rectangle {
+    property<LetterModel> letter;
+
+    callback state-changed(int);
+
+    min-height: 56px;
+    min-width: 56px;
+
+    background: {
+        letter.state == 1 ? #a4aec4 :
+        letter.state == 2 ? #f3c237 :
+        letter.state == 3 ? #79b851 : #fbfcff
+    }
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: {
+        letter.state == 1 ? #a4aec4 :
+        letter.state == 2 ? #f3c237 :
+        letter.state == 3 ? #79b851 : #dee1e9
+    }
+
+    animate border-color { duration: 80ms; }
+    animate background { duration: 80ms; }
+
+    Text { 
+        text: parent.letter.char;
+        font-size: 18pt;
+        font-weight: 700;
+        color: #fff;
+
+        height: parent.height;
+        width: parent.width;
+
+        horizontal-alignment: center;
+        vertical-alignment: center;
+    }
+
+    TouchArea {
+        clicked => {
+            if (root.letter.state == 0) {
+                return;
+            }
+
+            state-changed(root.letter.state + 1);
+        }
+    }
+}
+
+export Word := HorizontalLayout {
+    property <int> index: 0;
+    property <WordModel> word;
+    property <bool> selected: false;
+
+    callback clicked();
+    callback letter-state-changed(int, int);
+
+    alignment: center;
+
+    rect := Rectangle {
+        TouchArea {
+            clicked => {
+                root.clicked()
+            }
+        }
+
+        HorizontalLayout {
+            spacing: 6px;
+
+            Rectangle { 
+                min-width: 46px;
+
+                Text { 
+                    width: parent.width;
+                    height: parent.height;
+
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+
+                    text: selected ? "➔" : root.index;
+                    font-size: 16pt;
+                }
+            }
+            
+            for data[index] in word.letters: Letter { 
+                letter: data; 
+                state-changed(state) => { 
+                    letter-state-changed(index, state);
+                }
+            }
+        }
+    }
+}

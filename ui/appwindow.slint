@@ -1,33 +1,72 @@
-import { Button, VerticalBox } from "std-widgets.slint";
-import { Word } from "control/word.slint";
+import { VerticalBox } from "std-widgets.slint";
+import { Word, PrimaryButton } from "control/controls.slint";
 import { Keyboard } from "control/keyboard/keyboard.slint";
-import { WordModel, WordsModel } from "models.slint";
+import { WordSearcher } from "models.slint";
 
-export { WordsModel }
+export { WordSearcher }
 
 export AppWindow := Window {
-    property <WordsModel> words;
-
-    callback key-pressed(string);
-
     title: "5 letters";
 
     VerticalBox { 
-        VerticalBox {
-            alignment: center;
-            spacing: 6px;
+        HorizontalLayout { 
+            padding-bottom: 10px;
 
-            for word[index] in words.words: Word { 
-                selected: words.current-word-index == index;
-                word: word;
-                index: index + 1;
+            PrimaryButton { text: "Clear"; clicked => { WordSearcher.clear-all() } }
+            Rectangle { horizontal-stretch: 2; }
+            PrimaryButton { text: "Random words"; clicked => { WordSearcher.random() } }
+        }
+        HorizontalLayout {  
+            padding-bottom: 6px;
 
-                clicked => { 
-                    words.current-word-index = index;
+            VerticalLayout {
+                spacing: 6px;
+                horizontal-stretch: 2;
+                padding: 6px;
+
+                for word[index] in WordSearcher.words: Word { 
+                    selected: WordSearcher.current-word-index == index;
+                    word: word;
+                    index: index + 1;
+
+                    clicked => { 
+                        WordSearcher.current-word-index = index;
+                    }
+
+                    letter-state-changed(letter, sate) => { 
+                        WordSearcher.letter-state-changed(index, letter, sate);
+                    }
+                }
+            }
+
+            VerticalLayout {  
+                horizontal-stretch: 2;
+                padding: 6px;
+
+                Rectangle { 
+                    border-color: #dee1e9;
+                    border-radius: 4px;
+                    border-width: 2px;
+
+                    Flickable {
+                        HorizontalLayout { 
+                            Text { 
+                                text: WordSearcher.search_words;
+                                color: #5a6376;
+                                font-size: 16pt;
+        
+                                horizontal-alignment: center;
+                            }
+                        }
+                    }
                 }
             }
         }
         
-        Keyboard { key-pressed(key) => { root.key-pressed(key) } }
+        Keyboard { 
+            key-pressed(key) => { 
+                WordSearcher.key-pressed(key);
+            } 
+        }
     }
 }

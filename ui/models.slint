@@ -7,7 +7,13 @@ export struct WordModel := {
     letters: [LetterModel]
 }
 
-export struct WordsModel := {
-    current-word-index: int,
-    words: [WordModel],
+export global WordSearcher := {
+    property <[WordModel]> words;
+    property <int> current-word-index: 0;
+    property <string> search_words;
+
+    callback key-pressed(string);
+    callback letter-state-changed(int, int, int);
+    callback clear-all();
+    callback random();
 }
